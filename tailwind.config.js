@@ -6,18 +6,9 @@ export default {
     extend: {
       colors: {
         primary: "#42C83C",
-        base: {
-          dark: "#1C1B1B",
-          light: "#FBFBFB",
-        },
-        secondary: {
-          dark: "#D6D6D6",
-          light: "#000",
-        },
-        highlight: {
-          dark: "#E6E6E6",
-          light: "#A1A1A1",
-        },
+        base: "#1C1B1B",
+        secondary: "#D6D6D6",
+        highlight: "#E6E6E6",
       },
     },
   },
