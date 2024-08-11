@@ -13,6 +13,6 @@
 
 <ul>
     <li>Ibrahim "THE GOAT" Neutron</li>
-    <li>King Mohamed Neutron</li>
+    <li>King Mohamed Khaled</li>
     <li>Youssef Hassany "Nuff said"</li>
 </ul>
