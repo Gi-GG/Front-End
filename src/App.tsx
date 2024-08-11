@@ -1,11 +1,15 @@
-import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import { Home, Register } from "./pages";
 
 function App() {
-  return (
-    <main className="w-screen min-h-screen bg-base">
-      <h1 className="text-secondary text-center">Hello GI-GG</h1>
-    </main>
-  );
+    return (
+        <main className="bg-base min-h-screen w-screen">
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/register" element={<Register />} />
+            </Routes>
+        </main>
+    );
 }
 
 export default App;
