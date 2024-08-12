@@ -14,8 +14,9 @@ const SignInForm = () => {
   const [password, setPassword] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const { mutateAsync, isSuccess, isError } = useSignIn();
+  const { mutateAsync, isSuccess } = useSignIn();
 
   const [errors, setErrors] = useState<Errors>({
     username: false,
@@ -26,6 +27,7 @@ const SignInForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    setErrorMessage(null); // Reset error message
 
     const newErrors: Errors = {
       username: username.trim().length <= 3,
@@ -36,10 +38,17 @@ const SignInForm = () => {
     setErrors(newErrors);
 
     if (!newErrors.username && !newErrors.password) {
-      await mutateAsync({ email: username, password });
+      try {
+        await mutateAsync({ email: username, password });
+        setUsername("");
+        setPassword("");
+      } catch (error: any) {
+        setErrorMessage(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
       setIsLoading(false);
-      setUsername("");
-      setPassword("");
     }
   };
 
@@ -76,9 +85,7 @@ const SignInForm = () => {
         Sign In
       </Button>
 
-      {isError && (
-        <p className="text-red-600">Error signing in. Please try again.</p>
-      )}
+      {errorMessage && <p className="text-red-600">{errorMessage}</p>}
       {isSuccess && <p className="text-green-600">Signed in successfully!</p>}
     </form>
   );

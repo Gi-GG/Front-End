@@ -1,7 +1,6 @@
 import { appleIcon, googleIcon, twitterIcon, union } from "../assets";
 import { Link } from "react-router-dom";
 import FormNavigator from "../components/FormNavigator";
-import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import RegisterForm from "../components/auth/RegisterForm";
 
 const styles = {
@@ -12,50 +11,7 @@ const styles = {
   platIcons: "w-[30px]",
 };
 
-// Define a type for the form inputs
-interface InputsState {
-  fullName: string;
-  email: string;
-  password: string;
-}
-
-const initialState: InputsState = {
-  fullName: "",
-  email: "",
-  password: "",
-};
-
 const Register = () => {
-  const [inputs, setInputs] = useState<InputsState>(initialState);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [disabled, setDisabled] = useState<boolean>(true);
-
-  const handleInputs = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    /////////// on fulfilled /////////
-    // setInputs(initialState);
-    // setLoading(false);
-    // setDisabled(true);
-  };
-
-  useEffect(() => {
-    const { fullName, email, password } = inputs;
-
-    if (fullName && email && password) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [inputs]);
   return (
     <>
       <FormNavigator />
