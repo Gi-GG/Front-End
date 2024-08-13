@@ -1,11 +1,12 @@
-import React from 'react'
+import { useGetCurrentUser } from "../hooks/auth/useGetCurrentUser";
 
 const Home = () => {
+  const { data: user } = useGetCurrentUser();
   return (
     <>
-    <div>Home</div>
+      <div>Hello, {user?.name}</div>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

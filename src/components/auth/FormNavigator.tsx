@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { leftArrow, logo, typoLogo } from "../assets";
+import { leftArrow, logo, typoLogo } from "../../assets";
 
 const FormNavigator = () => {
     return (

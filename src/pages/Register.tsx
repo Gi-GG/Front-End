@@ -1,6 +1,6 @@
 import { appleIcon, googleIcon, twitterIcon, union } from "../assets";
 import { Link } from "react-router-dom";
-import FormNavigator from "../components/FormNavigator";
+import { FormNavigator } from "../components";
 import RegisterForm from "../components/auth/RegisterForm";
 
 const styles = {

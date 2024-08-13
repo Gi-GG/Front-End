@@ -4,6 +4,7 @@ import Input from "../shared/Input";
 import Button from "../shared/Button";
 
 interface Errors {
+    name: boolean;
     username: boolean;
     email: boolean;
     password: boolean;
@@ -12,12 +13,14 @@ interface Errors {
 
 // Define a type for the form inputs
 interface InputsState {
+    name: string;
     username: string;
     email: string;
     password: string;
 }
 
 const initialState: InputsState = {
+    name: "",
     username: "",
     email: "",
     password: "",
@@ -40,6 +43,7 @@ const RegisterForm = () => {
     };
 
     const [errors, setErrors] = useState<Errors>({
+        name: false,
         username: false,
         email: false,
         password: false,
@@ -52,6 +56,7 @@ const RegisterForm = () => {
         setErrorMessage(null); // Reset error message
 
         const newErrors: Errors = {
+            name: inputs.name.trim().length <= 3,
             username: inputs.username.trim().length <= 3,
             email: inputs.email.trim().length <= 3,
             password: inputs.password.trim().length < 6,
@@ -60,7 +65,12 @@ const RegisterForm = () => {
 
         setErrors(newErrors);
 
-        if (!newErrors.username && !newErrors.email && !newErrors.password) {
+        if (
+            !newErrors.name &&
+            !newErrors.username &&
+            !newErrors.email &&
+            !newErrors.password
+        ) {
             try {
                 await mutateAsync(inputs);
                 setInputs(initialState);
@@ -76,9 +86,9 @@ const RegisterForm = () => {
     };
 
     useEffect(() => {
-        const { username, email, password } = inputs;
+        const { username, email, password, name } = inputs;
 
-        if (username && email && password) {
+        if (username && email && password && name) {
             setDisabled(false);
         } else {
             setDisabled(true);
@@ -90,10 +100,24 @@ const RegisterForm = () => {
             <div className="w-full flex flex-col gap-2">
                 <Input
                     onChange={handleInputs}
+                    value={inputs.name}
+                    type="text"
+                    name="name"
+                    placeholder="Full Name"
+                    id="name"
+                />
+                {errors.username && (
+                    <p className="text-red-600">Invalid Username</p>
+                )}
+            </div>
+
+            <div className="w-full flex flex-col gap-2">
+                <Input
+                    onChange={handleInputs}
                     value={inputs.username}
                     type="text"
                     name="username"
-                    placeholder="Full Name"
+                    placeholder="username"
                     id="username"
                 />
                 {errors.username && (
