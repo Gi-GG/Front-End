@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Input from "../shared/Input";
-import Button from "../shared/Button";
 import useSignIn from "../../hooks/auth/useSignIn";
+import { Input, Button } from "../";
 
 interface Errors {
     username: boolean;

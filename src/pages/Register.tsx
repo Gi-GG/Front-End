@@ -1,7 +1,6 @@
 import { appleIcon, googleIcon, twitterIcon, union } from "../assets";
 import { Link } from "react-router-dom";
-import { FormNavigator } from "../components";
-import RegisterForm from "../components/auth/RegisterForm";
+import { Navigator, RegisterForm, TypoLogo } from "../components";
 
 const styles = {
     formGroup: "w-full",
@@ -13,7 +12,9 @@ const styles = {
 const Register = () => {
     return (
         <>
-            <FormNavigator />
+            <Navigator>
+                <TypoLogo />
+            </Navigator>
             <div className="w-full min-h-[calc(100svh-80px)] flex flex-col justify-center items-center ">
                 <img
                     className="absolute || top-0 right-0"

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { leftArrow, logo, typoLogo } from "../../assets";
+import { leftArrow } from "../../assets";
+import TypoLogo from "../shared/TypoLogo";
 
 const FormNavigator = () => {
     return (
@@ -12,18 +13,7 @@ const FormNavigator = () => {
                     >
                         <img className="w-full" src={leftArrow} alt="arrow" />
                     </Link>
-                    <div className="flex items-center justify-center">
-                        <img
-                            className="w-[50px] md:w-[70px]"
-                            src={logo}
-                            alt="logo"
-                        />
-                        <img
-                            className="w-[70px] md:w-[90px]"
-                            src={typoLogo}
-                            alt="logo"
-                        />
-                    </div>
+                    <TypoLogo />
                 </div>
             </nav>
         </>

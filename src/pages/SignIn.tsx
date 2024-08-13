@@ -1,7 +1,7 @@
-import { FormNavigator } from "../components";
+import { Navigator, SignInForm, TypoLogo } from "../components";
 import { appleIcon, googleIcon, twitterIcon, union } from "../assets";
 import { Link } from "react-router-dom";
-import SignInForm from "../components/auth/SignInForm";
+
 
 const SignIn = () => {
     const styles = {
@@ -13,7 +13,9 @@ const SignIn = () => {
 
     return (
         <>
-            <FormNavigator />
+            <Navigator>
+                <TypoLogo />
+            </Navigator>
             <img className="absolute || top-0 right-0" src={union} />
             <div className="w-full h-[calc(100svh-80px)] flex justify-center items-center">
                 <div className=" || ">

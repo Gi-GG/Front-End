@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useRegister from "../../hooks/auth/useRegister";
-import Input from "../shared/Input";
-import Button from "../shared/Button";
+import { Input, Button } from "../";
 
 interface Errors {
     name: boolean;
