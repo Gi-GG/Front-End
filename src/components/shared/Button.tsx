@@ -2,18 +2,17 @@ import React from "react";
 import { TailSpin } from "react-loader-spinner";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  // You can add custom props here if needed
   isLoading?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
+const Button: React.FC<ButtonProps> = ({ children, isLoading, ...props }) => {
   return (
     <button
       {...props}
-      className={`bg-primary || text-white text-xl ||| font-semibold || outline-none || rounded-3xl || px-2 py-5 || flex justify-center items-center gap-4 || disabled:bg-highlight ${props.className}`}
+      className={`bg-primary text-white text-xl font-semibold outline-none rounded-3xl px-2 py-5 flex justify-center items-center gap-4 disabled:bg-highlight ${props.className}`}
     >
       {children}
-      {props.isLoading && (
+      {isLoading && (
         <TailSpin
           visible={true}
           height="30"

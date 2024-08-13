@@ -4,4 +4,6 @@ export { default as googleIcon } from "./icons/google-icon.svg";
 export { default as appleIcon } from "./icons/apple-icon.svg";
 export { default as twitterIcon } from "./icons/twitter-icon.svg";
 export { default as union } from "./icons/Union.png";
+export { default as unoinRT } from "./icons/union-r-t.svg";
 export { default as leftArrow } from "./icons/left-arrow.svg";
+export { default as billi } from "./images/billi.svg";
