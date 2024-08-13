@@ -2,15 +2,13 @@ import { Navigator, SignInForm, TypoLogo } from "../components";
 import { appleIcon, googleIcon, twitterIcon, union } from "../assets";
 import { Link } from "react-router-dom";
 
-
+const styles = {
+    formGroup: "w-full",
+    input: "w-full || bg-transparent || outline-none || rounded-3xl || px-4 py-6 || border-[0.5px] border-secondary || text-white",
+    btn: "bg-primary || text-white text-xl ||| font-semibold || outline-none || rounded-3xl || px-2 py-5 || disabled:bg-slate-500",
+    platIcons: "w-[30px]",
+};
 const SignIn = () => {
-    const styles = {
-        formGroup: "w-full",
-        input: "w-full || bg-transparent || outline-none || rounded-3xl || px-4 py-6 || border-[0.5px] border-secondary || text-white",
-        btn: "bg-primary || text-white text-xl ||| font-semibold || outline-none || rounded-3xl || px-2 py-5 || disabled:bg-slate-500",
-        platIcons: "w-[30px]",
-    };
-
     return (
         <>
             <Navigator>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { billi, union, unoinRT } from "../assets";
 import { Button, Navigator, TypoLogo } from "../components";
 
@@ -20,8 +21,12 @@ const RegisterStage = () => {
                         Egypt.
                     </p>
                     <div className="flex justify-between items-center w-full flex-wrap mt-8">
-                        <Button className="px-8">Register</Button>
-                        <Button className="bg-transparent">Signin</Button>
+                        <Link to={"/register"}>
+                            <Button className="px-8">Register</Button>
+                        </Link>
+                        <Link to={"/sign-in"}>
+                            <Button className="bg-transparent">Signin</Button>
+                        </Link>
                     </div>
                 </div>
             </div>
