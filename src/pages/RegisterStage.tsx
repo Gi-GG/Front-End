@@ -15,12 +15,12 @@ const RegisterStage = () => {
                 <TypoLogo />
                 <div className="flex flex-col justify-center items-center gap-2">
                     <h1 className="text-[26px] text-white">Enjoy The Life!</h1>
-                    <p className="text-highlight text-sm text-center w-[306px] mx-auto">
+                    <p className="text-highlight text-sm text-center max-w-[306px] mx-auto">
                         GIGG is an Egyptian app for tracking concerts making it
                         easy to discover and follow the latest performances in
                         Egypt.
                     </p>
-                    <div className="flex justify-between items-center w-full flex-wrap mt-8">
+                    <div className="flex justify-between items-center gap-16 flex-wrap mt-8">
                         <Link to={"/register"}>
                             <Button className="px-8">Register</Button>
                         </Link>
