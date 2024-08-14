@@ -1,80 +1,79 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import useSignIn from "../../hooks/auth/useSignIn";
 import Form from "../shared/Form";
 import { FormGroup } from "../../types/formGroup";
-
-interface Errors {
-  username: boolean;
-  password: boolean;
-  root: boolean;
-}
-
-const formGroup: FormGroup[] = [
-  {
-    name: "username",
-    placeholder: "username",
-    type: "text",
-    value: "",
-  },
-  {
-    name: "password",
-    placeholder: "password",
-    type: "password",
-    value: "",
-  },
-];
+import { Errors } from "../../types/erorrs";
 
 const SignInForm = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+    const { mutateAsync, isSuccess } = useSignIn();
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [errors, setErrors] = useState<Errors>({
+        username: false,
+        password: false,
+        root: false,
+    });
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const formGroup: FormGroup[] = [
+        {
+            name: "username",
+            placeholder: "username",
+            type: "text",
+            value: "",
+            error: errors.username
+                ? "Username must be at least 4 characters"
+                : "",
+        },
+        {
+            name: "password",
+            placeholder: "password",
+            type: "password",
+            value: "",
+            error: errors.password
+                ? "Password must be at least 6 characters"
+                : "",
+        },
+    ];
 
-  const { mutateAsync, isSuccess } = useSignIn();
+    const handleSubmit = async (formValues: any) => {
+        setIsLoading(true);
+        setErrorMessage(null); // Reset error message
 
-  const [errors, setErrors] = useState<Errors>({
-    username: false,
-    password: false,
-    root: false,
-  });
+        const newErrors: Errors = {
+            username: formValues.username.trim().length <= 3,
+            password: formValues.password.trim().length < 6,
+            root: false,
+        };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMessage(null); // Reset error message
+        setErrors(newErrors);
 
-    const newErrors: Errors = {
-      username: username.trim().length <= 3,
-      password: password.trim().length < 6,
-      root: false,
+        if (!newErrors.username && !newErrors.password) {
+            try {
+                await mutateAsync({
+                    email: formValues.username,
+                    password: formValues.password,
+                });
+            } catch (error: any) {
+                setErrorMessage(error.message);
+            } finally {
+                setIsLoading(false);
+            }
+        } else {
+            setIsLoading(false);
+        }
     };
 
-    setErrors(newErrors);
-
-    if (!newErrors.username && !newErrors.password) {
-      try {
-        await mutateAsync({ email: username, password });
-        setUsername("");
-        setPassword("");
-      } catch (error: any) {
-        setErrorMessage(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    } else {
-      setIsLoading(false);
-    }
-  };
-
-  return (
-    <Form
-      formGroups={formGroup}
-      isLoading={isLoading}
-      buttonText="Sign In"
-      handleSubmit={handleSubmit}
-    />
-  );
+    return (
+        <Form
+            formGroups={formGroup}
+            isLoading={isLoading}
+            buttonText="Sign In"
+            handleSubmit={handleSubmit}
+            isSuccess={isSuccess}
+            error={errors}
+            errorMessage={errorMessage}
+        />
+    );
 };
 
 export default SignInForm;

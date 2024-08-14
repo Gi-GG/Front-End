@@ -1,46 +1,46 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import useRegister from "../../hooks/auth/useRegister";
-import { Input, Button } from "../";
+import { FormGroup } from "../../types/formGroup";
+import { Errors } from "../../types/erorrs";
+import Form from "../shared/Form";
 
-interface Errors {
-    name: boolean;
-    username: boolean;
-    email: boolean;
-    password: boolean;
-    root: boolean;
-}
 
-// Define a type for the form inputs
-interface InputsState {
-    name: string;
-    username: string;
-    email: string;
-    password: string;
-}
-
-const initialState: InputsState = {
-    name: "",
-    username: "",
-    email: "",
-    password: "",
-};
+const formGroup: FormGroup[] = [
+    {
+        name: "name",
+        placeholder: "Full Name",
+        type: "text",
+        value: "",
+        error: "",
+    },
+    {
+        name: "username",
+        placeholder: "Username",
+        type: "text",
+        value: "",
+        error: "",
+    },
+    {
+        name: "email",
+        placeholder: "Enter Email",
+        type: "email",
+        value: "",
+        error: "",
+    },
+    {
+        name: "password",
+        placeholder: "Password",
+        type: "password",
+        value: "",
+        error: "",
+    },
+];
 
 const RegisterForm = () => {
     const { mutateAsync, isSuccess } = useRegister();
 
-    const [inputs, setInputs] = useState<InputsState>(initialState);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [disabled, setDisabled] = useState<boolean>(true);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-    const handleInputs = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setInputs({
-            ...inputs,
-            [name]: value,
-        });
-    };
-
     const [errors, setErrors] = useState<Errors>({
         name: false,
         username: false,
@@ -49,16 +49,19 @@ const RegisterForm = () => {
         root: false,
     });
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (
+        e: React.FormEvent<HTMLFormElement>,
+        formValues: any
+    ) => {
         e.preventDefault();
-        setLoading(true);
+        setIsLoading(true);
         setErrorMessage(null); // Reset error message
 
         const newErrors: Errors = {
-            name: inputs.name.trim().length <= 3,
-            username: inputs.username.trim().length <= 3,
-            email: inputs.email.trim().length <= 3,
-            password: inputs.password.trim().length < 6,
+            name: formValues.name.trim().length <= 3,
+            username: formValues.username.trim().length <= 3,
+            email: formValues.email.trim().length <= 3,
+            password: formValues.password.trim().length < 6,
             root: false,
         };
 
@@ -71,104 +74,27 @@ const RegisterForm = () => {
             !newErrors.password
         ) {
             try {
-                await mutateAsync(inputs);
-                setInputs(initialState);
-                setDisabled(true);
+                await mutateAsync(formValues);
             } catch (error: any) {
                 setErrorMessage(error.message);
             } finally {
-                setLoading(false);
+                setIsLoading(false);
             }
         } else {
-            setLoading(false);
+            setIsLoading(false);
         }
     };
 
-    useEffect(() => {
-        const { username, email, password, name } = inputs;
-
-        if (username && email && password && name) {
-            setDisabled(false);
-        } else {
-            setDisabled(true);
-        }
-    }, [inputs]);
-
     return (
-        <form onSubmit={handleSubmit} className="mt-10 || flex flex-col gap-5">
-            <div className="w-full flex flex-col gap-2">
-                <Input
-                    onChange={handleInputs}
-                    value={inputs.name}
-                    type="text"
-                    name="name"
-                    placeholder="Full Name"
-                    id="name"
-                />
-                {errors.username && (
-                    <p className="text-red-600">Invalid Username</p>
-                )}
-            </div>
-
-            <div className="w-full flex flex-col gap-2">
-                <Input
-                    onChange={handleInputs}
-                    value={inputs.username}
-                    type="text"
-                    name="username"
-                    placeholder="username"
-                    id="username"
-                />
-                {errors.username && (
-                    <p className="text-red-600">Invalid Username</p>
-                )}
-            </div>
-
-            <div className="w-full flex flex-col gap-2">
-                <Input
-                    onChange={handleInputs}
-                    value={inputs.email}
-                    type="email"
-                    name="email"
-                    placeholder="Enter Email"
-                    id="email"
-                />
-                {errors.email && <p className="text-red-600">Invalid Email</p>}
-            </div>
-
-            <div className="w-full flex flex-col gap-2">
-                <Input
-                    onChange={handleInputs}
-                    value={inputs.password}
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    id="password"
-                />
-                {errors.password && (
-                    <p className="text-red-600">Invalid Password</p>
-                )}
-            </div>
-
-            <Button
-                type="submit"
-                isLoading={loading}
-                className="duration-200 hover:bg-opacity-65"
-                disabled={
-                    !inputs.username.trim() ||
-                    !inputs.password.trim() ||
-                    !inputs.email.trim() ||
-                    disabled
-                }
-            >
-                Create Account
-            </Button>
-
-            {errorMessage && <p className="text-red-600">{errorMessage}</p>}
-            {isSuccess && (
-                <p className="text-green-600">Account created successfully!</p>
-            )}
-        </form>
+        <Form
+            formGroups={formGroup}
+            isLoading={isLoading}
+            buttonText="Create Account"
+            handleSubmit={handleSubmit}
+            isSuccess={isSuccess}
+            error={errors}
+            errorMessage={errorMessage}
+        />
     );
 };
 
