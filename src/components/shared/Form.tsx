@@ -28,7 +28,7 @@ const Form = ({
     const [inputsState, setInputsState] = useState<any>(() => {
         const initialState: any = {};
         formGroups.forEach(group => {
-            initialState[group.name] = group.value || "";
+            initialState[group.name] = group.value;
         });
         return initialState;
     });

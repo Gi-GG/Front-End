@@ -1,5 +1,5 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Home, Register, RegisterStage, SignIn } from "./pages";
+import { ChangePassword, Home, Register, RegisterStage, SignIn } from "./pages";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 
@@ -21,6 +21,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/sign-in" element={<SignIn />} />
                 <Route path="/register-stage" element={<RegisterStage />} />
+                <Route path="/change-password" element={<ChangePassword />} />
             </Routes>
         </main>
     );
