@@ -35,7 +35,10 @@ const SignInForm = () => {
         },
     ];
 
-    const handleSubmit = async (formValues: any) => {
+    const handleSubmit = async (
+        e: React.FormEvent<HTMLFormElement>,
+        formValues: any
+    ) => {
         setIsLoading(true);
         setErrorMessage(null); // Reset error message
 
