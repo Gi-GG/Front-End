@@ -7,3 +7,6 @@ export { default as union } from "./icons/Union.png";
 export { default as unoinRT } from "./icons/union-r-t.svg";
 export { default as leftArrow } from "./icons/left-arrow.svg";
 export { default as billi } from "./images/billi.svg";
+export { default as abyo } from "./images/abyo.jpg";
+export { default as playIcon } from "./icons/play-icon.svg";
+export { default as notification } from "./icons/notification-icon.svg";
