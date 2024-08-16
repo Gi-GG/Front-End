@@ -1,13 +1,18 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import {
     ChangePassword,
     Home,
+    Profile,
     Register,
     RegisterStage,
     Search,
     SignIn,
 } from "./pages";
 import { NavBar, PageContainer, SideBar } from "./components";
+import ProtectedRoute from "./components/shared/ProtectedRoute";
+import Followers from "./components/profile/Followers";
+import Following from "./components/profile/Following";
+import ConcertsYouWent from "./components/profile/ConcertsYouWent";
 
 function App() {
     return (
@@ -26,6 +31,22 @@ function App() {
                         element={<ChangePassword />}
                     />
                     <Route path="/search" element={<Search />} />
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProtectedRoute>
+                                <Profile />
+                            </ProtectedRoute>
+                        }
+                    >
+                        <Route index element={<Navigate to={"followers"} />} />
+                        <Route path="followers" element={<Followers />} />
+                        <Route path="following" element={<Following />} />
+                        <Route
+                            path="concerts-you-went"
+                            element={<ConcertsYouWent />}
+                        />
+                    </Route>
                 </Routes>
             </PageContainer>
         </main>
