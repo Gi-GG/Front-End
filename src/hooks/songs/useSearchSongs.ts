@@ -16,12 +16,16 @@ export const useSearchSongs = (query: string) => {
                         },
                     }
                 );
+                console.log(data);
+                
                 return data;
             } catch (error) {
                 console.error("Error fetching songs:", error);
                 throw error;
             }
         },
-        enabled: !!query,
+        enabled: !!query, // Only run query if `query` is not empty
+        staleTime: 5 * 60 * 1000, // 5 minutes
+        retry: 2, // Retry failed requests up to 2 times
     });
 };

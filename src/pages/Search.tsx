@@ -6,16 +6,23 @@ import { TailSpin } from "react-loader-spinner";
 
 const Search = () => {
     const [search, setSearch] = useState<string>("");
+    const [debouncedTerm, setDebouncedTerm] = useState(search);
 
-    const { data, isLoading } = useSearchSongs(search);
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedTerm(search);
+        }, 500); // 500ms debounce time
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [search]);
+    const { data, isLoading } = useSearchSongs(debouncedTerm);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
     };
 
-    useEffect(() => {
-        console.log(data);
-    }, [search]);
     return (
         <>
             <Navigator>
