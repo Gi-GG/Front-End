@@ -1,12 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import { ChangePassword, Home, Register, RegisterStage, SignIn } from "./pages";
-import PageContainer from "./components/containers/PageContainer";
-import SideBar from "./components/containers/SideBar";
-import NavBar from "./components/containers/NavBar";
+import { NavBar, PageContainer, SideBar } from "./components";
 
 function App() {
   return (
-    <main className="bg-base text-secondary min-h-screen w-screen relative flex">
+    <main className="bg-base text-secondary h-screen w-screen relative flex">
       <SideBar />
       <NavBar />
 
