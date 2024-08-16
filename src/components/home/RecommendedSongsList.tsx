@@ -24,6 +24,9 @@ const RecommendedSongsList = ({ songs }: { songs: Song[] | undefined }) => {
       setPlayingSongUrl(null);
     } else {
       setPlayingSongUrl(songUrl);
+      setTimeout(() => {
+        setPlayingSongUrl(null);
+      }, 30000);
     }
   };
 
