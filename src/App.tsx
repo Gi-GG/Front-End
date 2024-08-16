@@ -1,12 +1,14 @@
 import { Route, Routes } from "react-router-dom";
 import { ChangePassword, Home, Register, RegisterStage, SignIn } from "./pages";
 import PageContainer from "./components/containers/PageContainer";
-// import SideBar from "./components/containers/SideBar";
+import SideBar from "./components/containers/SideBar";
+import NavBar from "./components/containers/NavBar";
 
 function App() {
   return (
     <main className="bg-base text-secondary min-h-screen w-screen relative flex">
-      {/* <SideBar /> */}
+      <SideBar />
+      <NavBar />
 
       <PageContainer>
         <Routes>
