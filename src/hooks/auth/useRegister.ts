@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { baseUrl } from "../../utils/baseUrl";
 import axios from "axios";
-import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../store/userTokenStore";
 
 interface User {
   username: string;
@@ -10,16 +11,19 @@ interface User {
 }
 
 const useRegister = () => {
+  const setToken = useAuthStore((state) => state.signIn);
+  const navigate = useNavigate();
+
   return useMutation({
     mutationKey: ["user"],
     mutationFn: async (user: User) => {
       const response = await axios.post(`${baseUrl}/auth/register`, user);
       console.log(response.data);
-      Cookies.set("token", response.data.token, { expires: 7 });
+      setToken(response.data.token);
       return response.data;
     },
     onSuccess: () => {
-      // Handle success (e.g., show a success message)
+      navigate("/");
     },
     onError: (error: any) => {
       // Pass the error message to the component
