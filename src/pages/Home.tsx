@@ -1,3 +1,4 @@
+import ProtectedRoute from "../components/shared/ProtectedRoute";
 import { useGetCurrentUser } from "../hooks/auth/useGetCurrentUser";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -16,155 +17,156 @@ const styles = {
 
 const Home = () => {
     // const { data: user } = useGetCurrentUser();
-
     return (
         <>
-            <div className="flex justify-between items-center px-5 py-3">
-                <img src={notification} alt="notification" />
-                <TypoLogo />
-                <BsThreeDotsVertical />
-            </div>
-            <div className="pl-3 py-5">
-                <Swiper
-                    className="pb-2"
-                    spaceBetween={-40}
-                    slidesPerView={3}
-                    breakpoints={{
-                        640: {
-                            slidesPerView: 2,
-                            spaceBetween: 10,
-                        },
-                        768: {
-                            slidesPerView: 3,
-                            spaceBetween: 10,
-                        },
-                        1024: {
-                            slidesPerView: 4,
-                            spaceBetween: 15,
-                        },
-                    }}
-                    // aria-label="Navigation Tabs"
-                >
-                    <SwiperSlide>
-                        <NavLink
-                            className={({ isActive }) =>
-                                isActive
-                                    ? `${styles.activeLink} ${styles.navLink}`
-                                    : styles.navLink
-                            }
-                            to={"/"}
-                        >
-                            Concerts
-                        </NavLink>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <NavLink
-                            className={({ isActive }) =>
-                                isActive
-                                    ? `${styles.activeLink} ${styles.navLink}`
-                                    : styles.navLink
-                            }
-                            to={"/"}
-                        >
-                            Videos
-                        </NavLink>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <NavLink
-                            className={({ isActive }) =>
-                                isActive
-                                    ? `${styles.activeLink} ${styles.navLink}`
-                                    : styles.navLink
-                            }
-                            to={"/"}
-                        >
-                            Artists
-                        </NavLink>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <NavLink
-                            className={({ isActive }) =>
-                                isActive
-                                    ? `${styles.activeLink} ${styles.navLink}`
-                                    : styles.navLink
-                            }
-                            to={"/"}
-                        >
-                            Photos
-                        </NavLink>
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <NavLink
-                            className={({ isActive }) =>
-                                isActive
-                                    ? `${styles.activeLink} ${styles.navLink}`
-                                    : styles.navLink
-                            }
-                            to={"/"}
-                        >
-                            Shits
-                        </NavLink>
-                    </SwiperSlide>
-                </Swiper>
+            <ProtectedRoute>
+                <div className="flex justify-between items-center px-5 py-3">
+                    <img src={notification} alt="notification" />
+                    <TypoLogo />
+                    <BsThreeDotsVertical />
+                </div>
+                <div className="pl-3 py-5">
+                    <Swiper
+                        className="pb-2"
+                        spaceBetween={-40}
+                        slidesPerView={3}
+                        breakpoints={{
+                            640: {
+                                slidesPerView: 2,
+                                spaceBetween: 10,
+                            },
+                            768: {
+                                slidesPerView: 3,
+                                spaceBetween: 10,
+                            },
+                            1024: {
+                                slidesPerView: 4,
+                                spaceBetween: 15,
+                            },
+                        }}
+                        // aria-label="Navigation Tabs"
+                    >
+                        <SwiperSlide>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.activeLink} ${styles.navLink}`
+                                        : styles.navLink
+                                }
+                                to={"/"}
+                            >
+                                Concerts
+                            </NavLink>
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.activeLink} ${styles.navLink}`
+                                        : styles.navLink
+                                }
+                                to={"/"}
+                            >
+                                Videos
+                            </NavLink>
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.activeLink} ${styles.navLink}`
+                                        : styles.navLink
+                                }
+                                to={"/"}
+                            >
+                                Artists
+                            </NavLink>
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.activeLink} ${styles.navLink}`
+                                        : styles.navLink
+                                }
+                                to={"/"}
+                            >
+                                Photos
+                            </NavLink>
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.activeLink} ${styles.navLink}`
+                                        : styles.navLink
+                                }
+                                to={"/"}
+                            >
+                                Shits
+                            </NavLink>
+                        </SwiperSlide>
+                    </Swiper>
 
-                <Swiper
-                    className="mt-5"
-                    spaceBetween={30}
-                    slidesPerView={3}
-                    breakpoints={{
-                        640: {
-                            slidesPerView: 2,
-                            spaceBetween: 10,
-                        },
-                        768: {
-                            slidesPerView: 3,
-                            spaceBetween: 10,
-                        },
-                        1024: {
-                            slidesPerView: 4,
-                            spaceBetween: 15,
-                        },
-                    }}
-                    // aria-label="Navigation Tabs"
-                >
-                    <SwiperSlide>
-                        <ConcertCard
-                            artist={"Abyusif"}
-                            concertTitle={"Dubai Tour"}
-                        />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ConcertCard
-                            artist={"Abyusif"}
-                            concertTitle={"Dubai Tour"}
-                        />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ConcertCard
-                            artist={"Abyusif"}
-                            concertTitle={"Dubai Tour"}
-                        />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ConcertCard
-                            artist={"Abyusif"}
-                            concertTitle={"Dubai Tour"}
-                        />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ConcertCard
-                            artist={"Abyusif"}
-                            concertTitle={"Dubai Tour"}
-                        />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <ConcertCard
-                            artist={"Abyusif"}
-                            concertTitle={"Dubai Tour"}
-                        />
-                    </SwiperSlide>
-                </Swiper>
-            </div>
+                    <Swiper
+                        className="mt-5"
+                        spaceBetween={30}
+                        slidesPerView={3}
+                        breakpoints={{
+                            640: {
+                                slidesPerView: 2,
+                                spaceBetween: 10,
+                            },
+                            768: {
+                                slidesPerView: 3,
+                                spaceBetween: 10,
+                            },
+                            1024: {
+                                slidesPerView: 4,
+                                spaceBetween: 15,
+                            },
+                        }}
+                        // aria-label="Navigation Tabs"
+                    >
+                        <SwiperSlide>
+                            <ConcertCard
+                                artist={"Abyusif"}
+                                concertTitle={"Dubai Tour"}
+                            />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <ConcertCard
+                                artist={"Abyusif"}
+                                concertTitle={"Dubai Tour"}
+                            />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <ConcertCard
+                                artist={"Abyusif"}
+                                concertTitle={"Dubai Tour"}
+                            />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <ConcertCard
+                                artist={"Abyusif"}
+                                concertTitle={"Dubai Tour"}
+                            />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <ConcertCard
+                                artist={"Abyusif"}
+                                concertTitle={"Dubai Tour"}
+                            />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <ConcertCard
+                                artist={"Abyusif"}
+                                concertTitle={"Dubai Tour"}
+                            />
+                        </SwiperSlide>
+                    </Swiper>
+                </div>
+            </ProtectedRoute>
         </>
     );
 };
