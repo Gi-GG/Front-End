@@ -1,6 +1,8 @@
 import { Navigator, SignInForm, TypoLogo } from "../components";
 import { appleIcon, googleIcon, twitterIcon, union } from "../assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuthStore from "../store/userTokenStore";
+import { useEffect } from "react";
 
 const styles = {
     formGroup: "w-full",
@@ -9,6 +11,14 @@ const styles = {
     platIcons: "w-[30px]",
 };
 const SignIn = () => {
+    const navigate = useNavigate();
+    const token = useAuthStore((state) => state.authToken);
+
+    useEffect(() => {
+        if (token) {
+            navigate("/", { replace: true }); // Redirect to home if already signed in
+        }
+    }, [token, navigate]);
     return (
         <>
             <Navigator>
