@@ -20,4 +20,5 @@ export { default as union } from "./icons/Union.png";
 export { default as billi } from "./images/billi.svg";
 export { default as abyo } from "./images/abyo.jpg";
 export { default as playIcon } from "./icons/play-icon.svg";
+export { default as pauseIcon } from "./icons/pause-icon.svg";
 export { default as notification } from "./icons/notification-icon.svg";

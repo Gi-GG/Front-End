@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Song } from "../../types/song";
 import RecommendedSong from "./RecommendedSong";
 import { motion } from "framer-motion";
@@ -6,14 +6,24 @@ import { motion } from "framer-motion";
 const RecommendedSongsList = ({ songs }: { songs: Song[] | undefined }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [songUrl, setSongUrl] = useState("");
+  const [playingSongUrl, setPlayingSongUrl] = useState<string | null>(null);
 
-  const handlePlay = () => {
+  useEffect(() => {
     if (audioRef.current) {
-      if (!audioRef.current.paused) {
-        audioRef.current.pause();
-      } else {
+      if (playingSongUrl) {
         audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
       }
+    }
+  }, [playingSongUrl, songUrl]);
+
+  const handlePlayPause = (songUrl: string) => {
+    if (playingSongUrl === songUrl) {
+      setPlayingSongUrl(null);
+    } else {
+      setPlayingSongUrl(songUrl);
     }
   };
 
@@ -25,12 +35,12 @@ const RecommendedSongsList = ({ songs }: { songs: Song[] | undefined }) => {
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -40 }}
-          key={index}
+          key={song.preview_url} // Use `preview_url` as a unique identifier
         >
           <RecommendedSong
-            handlePlay={handlePlay}
+            handlePlayPause={() => handlePlayPause(song.preview_url)}
             setSongUrl={setSongUrl}
-            key={song.song}
+            isPlaying={playingSongUrl === song.preview_url}
             song={song}
           />
         </motion.div>
