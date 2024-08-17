@@ -1,27 +1,28 @@
 import React, { useState } from "react";
-import useRegister from "../../hooks/auth/useRegister";
+import Form from "../shared/Form";
 import { FormGroup } from "../../types/formGroup";
 import { Errors } from "../../types/erorrs";
-import Form from "../shared/Form";
+import useChangePassword from "../../hooks/auth/useChangePassword";
+import useChangeEmail from "../../hooks/auth/useChangeEmail";
 
 const formGroup: FormGroup[] = [
     {
-        name: "name",
-        placeholder: "Full Name",
-        type: "text",
-        value: "",
-        error: "",
-    },
-    {
         name: "username",
-        placeholder: "Username",
+        placeholder: "User Name",
         type: "text",
         value: "",
         error: "",
     },
     {
-        name: "email",
-        placeholder: "Enter Email",
+        name: "oldEmail",
+        placeholder: "Old Email",
+        type: "email",
+        value: "",
+        error: "",
+    },
+    {
+        name: "newEmail",
+        placeholder: "New Email",
         type: "email",
         value: "",
         error: "",
@@ -35,10 +36,12 @@ const formGroup: FormGroup[] = [
     },
 ];
 
-const RegisterForm = () => {
-    const { mutateAsync, isSuccess } = useRegister();
 
+
+const ChangeEmailForm = () => {
+    const { mutateAsync, isSuccess } = useChangeEmail();
     const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [errors, setErrors] = useState<Errors>({
         name: false,
@@ -57,7 +60,6 @@ const RegisterForm = () => {
         setErrorMessage(null); // Reset error message
 
         const newErrors: Errors = {
-            name: formValues.name.trim().length <= 3,
             username: formValues.username.trim().length <= 3,
             email: formValues.email.trim().length <= 3,
             password: formValues.password.trim().length < 6,
@@ -76,7 +78,6 @@ const RegisterForm = () => {
                 await mutateAsync(formValues);
             } catch (error: any) {
                 setErrorMessage(error.message);
-                console.log(error.message);
             } finally {
                 setIsLoading(false);
             }
@@ -89,7 +90,7 @@ const RegisterForm = () => {
         <Form
             formGroups={formGroup}
             isLoading={isLoading}
-            buttonText="Create Account"
+            buttonText="Change My Password"
             handleSubmit={handleSubmit}
             isSuccess={isSuccess}
             error={errors}
@@ -98,4 +99,4 @@ const RegisterForm = () => {
     );
 };
 
-export default RegisterForm;
+export default ChangeEmailForm;

@@ -22,6 +22,7 @@ interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
 const Form = ({
     isLoading,
     isSuccess,
+    error,
     errorMessage,
     buttonText = "Submit",
     handleSubmit,
@@ -75,8 +76,10 @@ const Form = ({
                             name={input.name}
                             className={input.className}
                         />
-                        {input.error && (
-                            <p className="text-red-600">{input.error}</p>
+                        {error[input.name] && (
+                            <p className="text-red-600">
+                                {input.placeholder} is invalid.
+                            </p>
                         )}
                     </div>
                 ))}
