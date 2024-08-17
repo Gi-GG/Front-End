@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import { TailSpin } from "react-loader-spinner";
 import { FormGroup } from "../../types/formGroup";
 import Input from "./Input";
 import { Errors } from "../../types/erorrs";
+import { fadeLeftLine, fadeRightLine } from "../../assets";
 
 interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
     isLoading: boolean;
@@ -12,7 +13,10 @@ interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
     buttonText?: string;
     errorMessage: string | null;
     formGroups: FormGroup[];
-    handleSubmit: (e: React.FormEvent<HTMLFormElement>, formValues: any) => Promise<void>;
+    handleSubmit: (
+        e: React.FormEvent<HTMLFormElement>,
+        formValues: any
+    ) => Promise<void>;
 }
 
 const Form = ({
@@ -27,62 +31,82 @@ const Form = ({
     // States
     const [inputsState, setInputsState] = useState<any>(() => {
         const initialState: any = {};
-        formGroups.forEach(group => {
-            initialState[group.name] = group.value;
+        formGroups.forEach((group) => {
+            initialState[group.name] = group.value || "";
         });
         return initialState;
     });
+    const [disabled, setDisabled] = useState<boolean>(true);
 
     const handleInputs = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setInputsState({
-            ...inputsState,
+        setInputsState((prevState: any) => ({
+            ...prevState,
             [name]: value,
-        });
+        }));
     };
 
-    return (
-        <form
-            onSubmit={(e) => {
-                e.preventDefault();
-                handleSubmit(e, inputsState);
-            }}
-            {...props}
-            className={`mt-10 || flex flex-col gap-5 ${props.className}`}
-        >
-            {formGroups?.map((input, idx) => (
-                <div className="w-full flex flex-col gap-2" key={idx}>
-                    <Input
-                        type={input.type || "text"}
-                        placeholder={input.placeholder}
-                        value={inputsState?.[input.name]}
-                        onChange={handleInputs}
-                        name={input.name}
-                        className={input.className}
-                    />
-                    {input.error && (
-                        <p className="text-red-600">{input.error}</p>
-                    )}
-                </div>
-            ))}
+    useEffect(() => {
+        const allFilled = formGroups.every((group) => {
+            const value = inputsState[group.name];
+            return value !== "" && value !== undefined && value !== null;
+        });
 
-            <Button type="submit">
-                {buttonText}{" "}
-                {isLoading && (
-                    <TailSpin
-                        visible={true}
-                        height="30"
-                        width="30"
-                        color="#D6D6D6"
-                        ariaLabel="tail-spin-loading"
-                        radius="1"
-                    />
-                )}
-            </Button>
-            {errorMessage && <p className="text-red-600">{errorMessage}</p>}
-        </form>
+        setDisabled(!allFilled);
+    }, [inputsState, formGroups]);
+
+    return (
+        <>
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSubmit(e, inputsState);
+                }}
+                {...props}
+                className={`mt-10 || flex flex-col gap-5 ${props.className}`}
+            >
+                {formGroups?.map((input, idx) => (
+                    <div className="w-full flex flex-col gap-2" key={idx}>
+                        <Input
+                            type={input.type || "text"}
+                            placeholder={input.placeholder}
+                            value={inputsState?.[input.name]}
+                            onChange={handleInputs}
+                            name={input.name}
+                            className={input.className}
+                        />
+                        {input.error && (
+                            <p className="text-red-600">{input.error}</p>
+                        )}
+                    </div>
+                ))}
+
+                <Button
+                    className="disabled:bg-slate-400 transition duration-300 ease-in-out"
+                    disabled={disabled || isLoading}
+                    type="submit"
+                >
+                    {buttonText}{" "}
+                    {isLoading && (
+                        <TailSpin
+                            visible={true}
+                            height="30"
+                            width="30"
+                            color="#D6D6D6"
+                            ariaLabel="tail-spin-loading"
+                            radius="1"
+                        />
+                    )}
+                </Button>
+                {errorMessage && <p className="text-red-600">{errorMessage}</p>}
+            </form>
+            <div className="flex justify-center gap-5 my-5">
+                <img src={fadeRightLine} alt="fade-line" />
+                <span>Or</span>
+                <img src={fadeLeftLine} alt="fade-line" />
+            </div>
+        </>
     );
 };
 
 export default Form;
-

@@ -14,7 +14,7 @@ const ConcertCard: React.FC<ConcertCardProp> = ({
 }) => {
   return (
     <>
-      <div className="w-fit">
+      <div className="w-fit cursor-grabbing">
         <div className="relative">
           <div className="rounded-3xl || w-[120px] md:w-[150px] lg:w-[180px] || overflow-hidden">
             <img

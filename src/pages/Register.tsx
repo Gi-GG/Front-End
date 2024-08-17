@@ -1,4 +1,9 @@
-import { appleIcon, googleIcon, twitterIcon, union } from "../assets";
+import {
+    appleIcon,
+    googleIcon,
+    twitterIcon,
+    union,
+} from "../assets";
 import { Link, useNavigate } from "react-router-dom";
 import { Navigator, RegisterForm, TypoLogo } from "../components";
 import useAuthStore from "../store/userTokenStore";
@@ -72,7 +77,7 @@ const Register = () => {
 
                     <p className="text-white text-sm text-center mt-5">
                         Do you have an account?{" "}
-                        <Link className="text-blue-500 underline" to={"/"}>
+                        <Link className="text-blue-500 underline" to={"/sign-in"}>
                             Sign in
                         </Link>
                     </p>
