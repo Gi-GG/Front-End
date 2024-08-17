@@ -1,7 +1,7 @@
 import { appleIcon, googleIcon, twitterIcon, union } from "../assets";
 import { Link } from "react-router-dom";
 import { Navigator, TypoLogo } from "../components";
-import ChangePasswordForm from "../components/auth/ChangePasswordForm";
+import ChangeEmailForm from "../components/auth/ChangeEmailForm";
 
 const styles = {
     formGroup: "w-full",
@@ -9,7 +9,7 @@ const styles = {
     btn: "bg-primary || text-white text-xl ||| font-semibold || outline-none || rounded-3xl || px-2 py-5 || transition duration-500 disabled:bg-slate-500",
     platIcons: "w-[30px]",
 };
-const ChangePassword = () => {
+const ChangeEmail = () => {
     return (
         <>
             <Navigator>
@@ -25,21 +25,12 @@ const ChangePassword = () => {
                     {/* Form Header */}
                     <div className="flex flex-col items-center gap-2">
                         <h1 className="text-3xl text-white || font-semibold">
-                            Change Password
+                            Change Email
                         </h1>
-                        {/* <p className="text-white text-sm">
-                            If you need any support{" "}
-                            <Link
-                                className="text-primary || underline"
-                                to={"/"}
-                            >
-                                click here
-                            </Link>
-                        </p> */}
                     </div>
 
                     {/* Form Body */}
-                    <ChangePasswordForm />
+                    <ChangeEmailForm />
 
                     <p className="text-white text-sm text-center mt-5">
                         If you need any support{" "}
@@ -71,4 +62,4 @@ const ChangePassword = () => {
     );
 };
 
-export default ChangePassword;
+export default ChangeEmail;
