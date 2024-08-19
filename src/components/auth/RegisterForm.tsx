@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import useRegister from "../../hooks/auth/useRegister";
 import { FormGroup } from "../../types/formGroup";
 import Form from "../shared/Form";
