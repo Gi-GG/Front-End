@@ -34,7 +34,7 @@ const RecommendedSongsList = ({ songs }: { songs: Song[] | undefined }) => {
     <div className="flex flex-col gap-4">
       {songs?.map((song, index) => (
         <motion.div
-          transition={{ duration: 0.8, delay: index * 0.1 }}
+          transition={{ duration: 0.8, delay: (index + 1) * 0.3 }}
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -40 }}
