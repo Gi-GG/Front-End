@@ -22,5 +22,7 @@ export { default as fadeRightLine } from "./icons/fade-right-line.svg";
 
 // images
 export { default as union } from "./icons/Union.png";
+export { default as usnionSVG } from "./icons/union-svg.svg";
 export { default as billi } from "./images/billi.svg";
 export { default as abyo } from "./images/abyo.jpg";
+export { default as neutron } from "./images/neutron.png";
