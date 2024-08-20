@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 interface Props {
   children: React.ReactNode;
@@ -6,10 +7,16 @@ interface Props {
 
 const PageContainer = ({ children }: Props) => {
   return (
-    <div className={`w-full min-h-screen overflow-y-scroll overflow-x-hidden`}>
+    <motion.div
+      transition={{ duration: 0.3 }}
+      initial={{ opacity: 0, x: -40 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -40 }}
+      className={`w-full min-h-screen overflow-x-hidden`}
+    >
       {children}
       <div className="mt-28"></div>
-    </div>
+    </motion.div>
   );
 };
 
