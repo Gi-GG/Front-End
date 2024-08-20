@@ -1,6 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import Cookies from "js-cookie";
 import { baseUrl } from "../../utils/baseUrl";
 import useAuthStore from "../../store/userTokenStore";
 

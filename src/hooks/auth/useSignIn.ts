@@ -18,11 +18,10 @@ const useSignIn = () => {
         mutationFn: async (user: User) => {
             const response = await axios.post(`${baseUrl}/auth/login`, user);
             setToken(response.data.token);
-            console.log(response.data);
             return response.data;
         },
         onSuccess: () => {
-            navigate("/", { replace: true }); // Prevents back navigation to sign-in
+            navigate("/", { replace: true });
         },
         onError: (error: any) => {
             const errorMessage =

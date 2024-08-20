@@ -1,41 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Button from "./Button";
 import { TailSpin } from "react-loader-spinner";
 import { FormGroup } from "../../types/formGroup";
 import Input from "./Input";
-import { Errors } from "../../types/erorrs";
 import { fadeLeftLine, fadeRightLine } from "../../assets";
+import { UseMutateAsyncFunction } from "@tanstack/react-query";
 
-interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
+
+type MutateFunction<T> = UseMutateAsyncFunction<any, any, T, unknown>;
+
+interface FormProps<T> extends React.FormHTMLAttributes<HTMLFormElement> {
     isLoading: boolean;
     isSuccess: boolean;
-    error: Errors;
     buttonText?: string;
-    errorMessage: string | null;
     formGroups: FormGroup[];
-    handleSubmit: (
-        e: React.FormEvent<HTMLFormElement>,
-        formValues: any
-    ) => Promise<void>;
+    setIsLoading: Dispatch<SetStateAction<boolean>>;
+    mutateFunction: MutateFunction<T>;
 }
 
-const Form = ({
+const Form = <T,>({
     isLoading,
     isSuccess,
-    error,
-    errorMessage,
     buttonText = "Submit",
-    handleSubmit,
     formGroups,
+    mutateFunction,
+    setIsLoading,
     ...props
-}: FormProps) => {
+}: FormProps<T>) => {
     // States
+    const [errorMessage, setErrorMessage] = useState("");
     const [inputsState, setInputsState] = useState<any>(() => {
         const initialState: any = {};
         formGroups.forEach((group) => {
             initialState[group.name] = group.value || "";
         });
         return initialState;
+    });
+
+    const [errors, setErrors] = useState<Record<string, boolean>>(() => {
+        return formGroups.reduce((acc, group) => {
+            acc[group.name] = false;
+            return acc;
+        }, {} as Record<string, boolean>);
     });
     const [disabled, setDisabled] = useState<boolean>(true);
 
@@ -45,6 +51,39 @@ const Form = ({
             ...prevState,
             [name]: value,
         }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        let newErrors: Record<string, boolean> = {};
+        let hasError = false;
+
+        formGroups.forEach((group) => {
+            const isError = group.validation(
+                inputsState[group.name],
+                inputsState.password
+            );
+            newErrors[group.name] = isError;
+
+            if (isError) {
+                hasError = true;
+            }
+        });
+        setErrors(newErrors);
+
+        if (!hasError) {
+            try {
+                await mutateFunction(inputsState);
+            } catch (error: any) {
+                setErrorMessage(error.message);
+            } finally {
+                setIsLoading(false);
+            }
+        } else {
+            setIsLoading(false);
+        }
     };
 
     useEffect(() => {
@@ -61,7 +100,7 @@ const Form = ({
             <form
                 onSubmit={(e) => {
                     e.preventDefault();
-                    handleSubmit(e, inputsState);
+                    handleSubmit(e);
                 }}
                 {...props}
                 className={`mt-10 || flex flex-col gap-5 ${props.className}`}
@@ -76,10 +115,10 @@ const Form = ({
                             name={input.name}
                             className={input.className}
                         />
-                        {error[input.name] && (
-                            <p className="text-red-600">
-                                {input.placeholder} is invalid.
-                            </p>
+                        {errors[input.name] && (
+                            <span className="py-1 text-red-600 font-semibold">
+                                {input.errorMessage || "Invalid Input"}
+                            </span>
                         )}
                     </div>
                 ))}

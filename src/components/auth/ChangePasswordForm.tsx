@@ -1,99 +1,68 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import Form from "../shared/Form";
 import { FormGroup } from "../../types/formGroup";
-import { Errors } from "../../types/erorrs";
 import useChangePassword from "../../hooks/auth/useChangePassword";
+
+interface Passwords {
+    oldPassword: string;newPassword
+    : string;
+}
 
 const formGroup: FormGroup[] = [
     {
         name: "email",
         placeholder: "Email",
-        type: "email",
+        type: "text",
         value: "",
-        error: "",
+        errorMessage: "Invalid Email",
+        validation: (...props) => {
+            return props[0].trim().length <= 3;
+        },
     },
     {
         name: "newPassword",
         placeholder: "New Password",
         type: "password",
         value: "",
-        error: "",
+        errorMessage: "Passwords are not identical",
+        validation: (...props) => {
+            return props[0].trim().length < 6;
+        },
     },
     {
-        name: "RepeatPassword",
-        placeholder: "Repeat New Password",
+        name: "repeatPassword",
+        placeholder: "Repeat Password",
         type: "password",
         value: "",
-        error: "",
+        errorMessage: "Passwords do not match",
+        validation: (...props) => {
+            return props[0] !== props[1];
+        },
     },
     {
         name: "oldPassword",
         placeholder: "Old Password",
         type: "password",
         value: "",
-        error: "",
+        errorMessage: "Password is Invalid",
+        validation: (...props) => {
+            return props[0].trim().length < 6;
+        },
     },
 ];
-
-
 
 const ChangePasswordForm = () => {
     const { mutateAsync, isSuccess } = useChangePassword();
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const [errors, setErrors] = useState<Errors>({
-        name: false,
-        username: false,
-        email: false,
-        password: false,
-        root: false,
-    });
-
-    const handleSubmit = async (
-        e: React.FormEvent<HTMLFormElement>,
-        formValues: any
-    ) => {
-        e.preventDefault();
-        setIsLoading(true);
-        setErrorMessage(null); // Reset error message
-
-        const newErrors: Errors = {
-            name: formValues.name.trim().length <= 3,
-            username: formValues.username.trim().length <= 3,
-            email: formValues.email.trim().length <= 3,
-            password: formValues.password.trim().length < 6,
-            root: false,
-        };
-
-        setErrors(newErrors);
-
-        if (
-            !newErrors.name &&
-            !newErrors.username &&
-            !newErrors.email &&
-            !newErrors.password
-        ) {
-            try {
-                await mutateAsync(formValues);
-            } catch (error: any) {
-                setErrorMessage(error.message);
-            } finally {
-                setIsLoading(false);
-            }
-        } else {
-            setIsLoading(false);
-        }
-    };
 
     return (
-        <Form
+        <Form<Passwords>
             formGroups={formGroup}
             isLoading={isLoading}
             buttonText="Change My Password"
-            handleSubmit={handleSubmit}
             isSuccess={isSuccess}
-            error={errors}
-            errorMessage={errorMessage}
+            setIsLoading={setIsLoading}
+            mutateFunction={mutateAsync}
         />
     );
 };
