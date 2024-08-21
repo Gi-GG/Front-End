@@ -1,7 +1,8 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import {
     ChangePassword,
     Home,
+    LikedConcerts,
     Profile,
     Register,
     RegisterStage,
@@ -14,6 +15,7 @@ import Followers from "./components/profile/Followers";
 import Following from "./components/profile/Following";
 import ConcertsYouWent from "./components/profile/ConcertsYouWent";
 import ChangeEmail from "./pages/ChangeEmail";
+import { Toaster } from "react-hot-toast";
 
 function App() {
     return (
@@ -24,6 +26,7 @@ function App() {
             <PageContainer>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/liked-concerts" element={<LikedConcerts />} />
 
                     {/******************** Forms ********************/}
                     <Route path="/register" element={<Register />} />
@@ -55,6 +58,8 @@ function App() {
                     </Route>
                 </Routes>
             </PageContainer>
+
+            <Toaster />
         </main>
     );
 }

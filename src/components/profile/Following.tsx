@@ -1,4 +1,3 @@
-
 const Following = () => {
     return <div>Following</div>;
 };
