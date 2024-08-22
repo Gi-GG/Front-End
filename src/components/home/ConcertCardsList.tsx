@@ -14,106 +14,9 @@ const ConcertCardsList = () => {
     return (
         <div className="pl-3 py-5">
             <Swiper
-        className="pb-2"
-        spaceBetween={20}
-        slidesPerView={3}
-        breakpoints={{
-            290: {
-                slidesPerView: 2,
-                spaceBetween: 5,
-            },
-            400: {
-                slidesPerView: 3,
-                spaceBetween: 10,
-            },
-            500: {
-                slidesPerView: 5,
-                spaceBetween: 3,
-            },
-            600: {
-                slidesPerView: 5,
-                spaceBetween: 50,
-            },
-            768: {
-                slidesPerView: 6,
-                spaceBetween: 20,
-            },
-            850: {
-                slidesPerView: 8,
-                spaceBetween: 10,
-            },
-            1024: {
-                slidesPerView: 5,
-                spaceBetween: 15,
-            },
-        }}
-      >
-        <SwiperSlide>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.activeLink} ${styles.navLink}`
-                : styles.navLink
-            }
-            to={"/"}
-          >
-            Concerts
-          </NavLink>
-        </SwiperSlide>
-        <SwiperSlide>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.activeLink} ${styles.navLink}`
-                : styles.navLink
-            }
-            to={"/"}
-          >
-            Videos
-          </NavLink>
-        </SwiperSlide>
-        <SwiperSlide>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.activeLink} ${styles.navLink}`
-                : styles.navLink
-            }
-            to={"/"}
-          >
-            Artists
-          </NavLink>
-        </SwiperSlide>
-        <SwiperSlide>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.activeLink} ${styles.navLink}`
-                : styles.navLink
-            }
-            to={"/"}
-          >
-            Photos
-          </NavLink>
-        </SwiperSlide>
-        <SwiperSlide>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.activeLink} ${styles.navLink}`
-                : styles.navLink
-            }
-            to={"/"}
-          >
-            Shits
-          </NavLink>
-        </SwiperSlide>
-      </Swiper>
-
-            <Swiper
-                className="mt-10"
+                className="mySwiper pb-2"
                 spaceBetween={10}
-                slidesPerView={2}
+                slidesPerView={3}
                 breakpoints={{
                     290: {
                         slidesPerView: 2,
@@ -124,15 +27,112 @@ const ConcertCardsList = () => {
                         spaceBetween: 10,
                     },
                     500: {
-                        slidesPerView: 3,
+                        slidesPerView: 5,
                         spaceBetween: 3,
                     },
-                    600: {
+                    768: {
+                        slidesPerView: 6,
+                        spaceBetween: 20,
+                    },
+                    850: {
+                        slidesPerView: 8,
+                        spaceBetween: 10,
+                    },
+                    1024: {
                         slidesPerView: 5,
-                        spaceBetween: 120,
+                        spaceBetween: 15,
+                    },
+                }}
+            >
+                <SwiperSlide>
+                    <NavLink
+                        className={({ isActive }) =>
+                            isActive
+                                ? `${styles.activeLink} ${styles.navLink}`
+                                : styles.navLink
+                        }
+                        to={"/"}
+                    >
+                        Concerts
+                    </NavLink>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <NavLink
+                        className={({ isActive }) =>
+                            isActive
+                                ? `${styles.activeLink} ${styles.navLink}`
+                                : styles.navLink
+                        }
+                        to={"/"}
+                    >
+                        Videos
+                    </NavLink>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <NavLink
+                        className={({ isActive }) =>
+                            isActive
+                                ? `${styles.activeLink} ${styles.navLink}`
+                                : styles.navLink
+                        }
+                        to={"/"}
+                    >
+                        Artists
+                    </NavLink>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <NavLink
+                        className={({ isActive }) =>
+                            isActive
+                                ? `${styles.activeLink} ${styles.navLink}`
+                                : styles.navLink
+                        }
+                        to={"/"}
+                    >
+                        Photos
+                    </NavLink>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <NavLink
+                        className={({ isActive }) =>
+                            isActive
+                                ? `${styles.activeLink} ${styles.navLink}`
+                                : styles.navLink
+                        }
+                        to={"/"}
+                    >
+                        Shits
+                    </NavLink>
+                </SwiperSlide>
+            </Swiper>
+
+            <Swiper
+                className="mySwiper mt-10"
+                spaceBetween={10}
+                slidesPerView={2}
+                breakpoints={{
+                    290: {
+                        slidesPerView: 2,
+                        spaceBetween: 10,
+                    },
+                    400: {
+                        slidesPerView: 3,
+                        spaceBetween: 10,
+                    },
+                    500: {
+                        slidesPerView: 3,
+                        spaceBetween: 10,
+                    },
+                    600: {
+                        slidesPerView: 4,
+                        spaceBetween: 10,
                     },
                     768: {
                         slidesPerView: 4,
+                        spaceBetween: 8,
+                    },
+                    850: {
+                        slidesPerView: 5,
                         spaceBetween: 10,
                     },
                     1024: {
