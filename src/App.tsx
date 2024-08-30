@@ -9,6 +9,7 @@ import {
     RegisterStage,
     Search,
     SignIn,
+    Videos,
 } from "./pages";
 import { NavBar, PageContainer, SideBar } from "./components";
 import ProtectedRoute from "./components/shared/ProtectedRoute";
@@ -28,6 +29,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/:id" element={<ConcertPage />} />
+                    <Route path="/videos" element={<Videos />} />
+
                     <Route path="/liked-concerts" element={<LikedConcerts />} />
 
                     {/******************** Forms ********************/}

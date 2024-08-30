@@ -210,7 +210,7 @@ const ConcertCardsList = () => {
                                 ? `${styles.activeLink} ${styles.navLink}`
                                 : styles.navLink
                         }
-                        to={"/"}
+                        to={"/videos"}
                     >
                         Videos
                     </NavLink>

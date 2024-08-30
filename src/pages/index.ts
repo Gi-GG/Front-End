@@ -7,3 +7,4 @@ export { default as Search } from "./Search";
 export { default as Profile } from "./Profile";
 export { default as LikedConcerts } from "./LikedConcerts";
 export { default as ConcertPage } from "./ConcertPage";
+export { default as Videos } from "./Videos";
