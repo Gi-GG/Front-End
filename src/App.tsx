@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import {
     ChangePassword,
+    ConcertPage,
     Home,
     LikedConcerts,
     Profile,
@@ -26,6 +27,7 @@ function App() {
             <PageContainer>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/:id" element={<ConcertPage />} />
                     <Route path="/liked-concerts" element={<LikedConcerts />} />
 
                     {/******************** Forms ********************/}

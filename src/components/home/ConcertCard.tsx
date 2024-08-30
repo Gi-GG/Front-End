@@ -14,15 +14,15 @@ const ConcertCard: React.FC<ConcertCardProp> = ({
 }) => {
     return (
         <>
-            <div className="w-fit cursor-grabbing ">
-                <div className="relative">
-                    <div className="rounded-3xl || max-w-[180px] || overflow-hidden">
+            <div className="w-fit cursor-pointer">
+                <div className="flex justify-center max-w-[180px] h-[12rem] items-center relative">
+                    <div className="rounded-3xl || w-full h-full || overflow-hidden ">
                         <img
-                            className="max-w-[100%] object-cover"
+                            className="max-w-[100%] min-h-[100%] object-cover"
                             src={concertCover || abyo}
                             alt="me"
                         />
-                        <div className="absolute translate-x-[-0.7rem] -bottom-2 -right-2 w-[30px] h-[30px] rounded-full flex justify-center items-center cursor-pointer bg-highlight">
+                        <div className="absolute translate-x-[-1rem] -bottom-2 -right-2 w-[30px] h-[30px] rounded-full flex justify-center items-center cursor-pointer bg-highlight">
                             <img src={playIcon} alt="play" />
                         </div>
                     </div>
