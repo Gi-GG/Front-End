@@ -3,5 +3,11 @@
 @tailwind utilities;
 
 .active {
-  @apply border-b-2 border-primary text-primary font-medium;
+    @apply border-b-2 border-primary text-primary font-medium;
+}
+
+.concert-cover {
+    background-position: center;
+    background-size: 40vw;
+    max-width: 100%;
 }

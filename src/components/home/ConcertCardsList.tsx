@@ -8,6 +8,11 @@ interface SetDetails {
     tracks: number;
 }
 
+interface Album {
+    title: string;
+    cover: string;
+}
+
 interface Concert {
     artistName: string;
     title: string;
@@ -15,7 +20,10 @@ interface Concert {
     location: string;
     date: string;
     set: SetDetails;
+    albums: Album[];
 }
+const albumCover =
+    "https://scene360.com/wp-content/uploads/2014/11/computergraphics-album-covers-2014-18.jpg";
 
 const concerts: Concert[] = [
     {
@@ -28,6 +36,12 @@ const concerts: Concert[] = [
             albums: 4,
             tracks: 20,
         },
+        albums: [
+            { title: "After Hours", cover: albumCover },
+            { title: "Starboy", cover: albumCover },
+            { title: "Beauty Behind the Madness", cover: albumCover },
+            { title: "Kiss Land", cover: albumCover },
+        ],
     },
     {
         artistName: "Billie Eilish",
@@ -39,6 +53,13 @@ const concerts: Concert[] = [
             albums: 2,
             tracks: 18,
         },
+        albums: [
+            { title: "Happier Than Ever", cover: albumCover },
+            {
+                title: "When We All Fall Asleep, Where Do We Go?",
+                cover: albumCover,
+            },
+        ],
     },
     {
         artistName: "Drake",
@@ -50,39 +71,76 @@ const concerts: Concert[] = [
             albums: 6,
             tracks: 25,
         },
+        albums: [
+            { title: "Certified Lover Boy", cover: albumCover },
+            { title: "Scorpion", cover: albumCover },
+            { title: "Views", cover: albumCover },
+            { title: "Take Care", cover: albumCover },
+            { title: "Nothing Was the Same", cover: albumCover },
+            {
+                title: "If You're Reading This It's Too Late",
+                cover: albumCover,
+            },
+        ],
     },
     {
         artistName: "Taylor Swift",
-        title: "The Eras Tour",
+        title: "Eras Tour",
         cover: "https://th.bing.com/th/id/OIP.qi4hZsvUhVpMjxlj-iL1xwAAAA?rs=1&pid=ImgDetMain",
-        location: "SoFi Stadium, Los Angeles",
-        date: "2024-12-01",
+        location: "AT&T Stadium, Arlington",
+        date: "2024-11-10",
         set: {
-            albums: 9,
-            tracks: 28,
+            albums: 10,
+            tracks: 40,
         },
-    },
-    {
-        artistName: "BTS",
-        title: "Map of the Soul Tour",
-        cover: "https://i0.wp.com/kstationtv.com/wp-content/uploads/2020/10/Affiche-concert-Map-Of-The-Soul-ONE-BTS.jpeg?resize=1087%2C1536&ssl=1",
-        location: "Olympic Stadium, Seoul",
-        date: "2024-08-30",
-        set: {
-            albums: 7,
-            tracks: 23,
-        },
+        albums: [
+            { title: "Lover", cover: albumCover },
+            { title: "Folklore", cover: albumCover },
+            { title: "Evermore", cover: albumCover },
+            { title: "Red (Taylor's Version)", cover: albumCover },
+            { title: "Speak Now (Taylor's Version)", cover: albumCover },
+            { title: "Reputation", cover: albumCover },
+            { title: "1989", cover: albumCover },
+            { title: "Fearless (Taylor's Version)", cover: albumCover },
+            { title: "Speak Now", cover: albumCover },
+            { title: "Red", cover: albumCover },
+        ],
     },
     {
         artistName: "Adele",
-        title: "30 Tour",
-        cover: "https://th.bing.com/th/id/OIP.1FlctZbiT10TmMpBJ8efLQHaHa?rs=1&pid=ImgDetMain",
-        location: "Royal Albert Hall, London",
-        date: "2024-11-25",
+        title: "30 World Tour",
+        cover: "https://th.bing.com/th/id/OIP.lEtfPbIvS5gR53DuzPAklQAAAA?rs=1&pid=ImgDetMain",
+        location: "O2 Arena, London",
+        date: "2024-12-10",
         set: {
             albums: 4,
-            tracks: 15,
+            tracks: 21,
         },
+        albums: [
+            { title: "30", cover: albumCover },
+            { title: "25", cover: albumCover },
+            { title: "21", cover: albumCover },
+            { title: "19", cover: albumCover },
+        ],
+    },
+    {
+        artistName: "Travis Scott",
+        title: "Astroworld Tour",
+        cover: "https://th.bing.com/th/id/OIP.j6x5GiTN_mXz6SBJC4cj8gHaHa?rs=1&pid=ImgDetMain",
+        location: "United Center, Chicago",
+        date: "2024-11-05",
+        set: {
+            albums: 6,
+            tracks: 25,
+        },
+        albums: [
+            { title: "Astroworld", cover: albumCover },
+            { title: "Rodeo", cover: albumCover },
+            { title: "Birds in the Trap Sing McKnight", cover: albumCover },
+            { title: "Utopia", cover: albumCover },
+            { title: "Huncho Jack, Jack Huncho", cover: albumCover },
+            { title: "Days Before Rodeo", cover: albumCover },
+        ],
     },
 ];
 
@@ -95,7 +153,9 @@ const styles = {
 const ConcertCardsList = () => {
     const navigate = useNavigate();
     const weee = (concert: Concert) => {
-        navigate(`/${concert.title}`);
+        navigate(`/${concert.title}`, {
+            state: concert,
+        });
     };
 
     return (
