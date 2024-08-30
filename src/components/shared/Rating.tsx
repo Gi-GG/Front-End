@@ -19,9 +19,9 @@ const Rating = ({ maxRating = 5, song }: RatingProp) => {
         setRating(i + 1);
     };
 
-    useEffect(() => {
-        console.log({ ...song, userId: data?._id, rating });
-    }, [rating]);
+    // useEffect(() => {
+    //     console.log({ ...song, userId: data?._id, rating });
+    // }, [rating]);
 
     return (
         <div className="flex items-center gap-1">
