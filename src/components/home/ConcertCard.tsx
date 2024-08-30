@@ -3,7 +3,7 @@ import { abyo, playIcon } from "../../assets";
 
 interface ConcertCardProp {
     concertTitle: string;
-    artist: string;
+    artist?: string;
     concertCover?: string;
 }
 
