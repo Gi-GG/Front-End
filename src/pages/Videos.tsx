@@ -110,7 +110,7 @@ const useIntersectionObserver = (
 };
 
 const VideoDetails: FC = () => (
-    <div className="absolute w-[90%] bottom-20 left-0 pl-2">
+    <div className="absolute w-[90%] bottom-20 lg:bottom-5 left-0 pl-2">
         <div className="flex items-center gap-5">
             <div className="user flex items-center gap-2">
                 <div className="w-[50px] h-[50px] rounded-full overflow-hidden">
@@ -134,7 +134,7 @@ const VideoDetails: FC = () => (
 );
 
 const VideoActions: FC = () => (
-    <div className="flex absolute right-0 bottom-20 pr-5 h-[100%] w-[10%] flex-col justify-end items-center gap-10 text-black">
+    <div className="flex absolute right-0 bottom-20 lg:bottom-5 pr-5 h-[100%] w-[10%] flex-col justify-end items-center gap-10 text-black">
         <span>
             <CiHeart color="white" size={30} />
         </span>
