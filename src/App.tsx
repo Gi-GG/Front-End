@@ -1,13 +1,15 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import {
-  ChangePassword,
-  Home,
-  LikedConcerts,
-  Profile,
-  Register,
-  RegisterStage,
-  Search,
-  SignIn,
+    ChangePassword,
+    ConcertPage,
+    Home,
+    LikedConcerts,
+    Profile,
+    Register,
+    RegisterStage,
+    Search,
+    SignIn,
+    Videos,
 } from "./pages";
 import { NavBar, PageContainer, SideBar } from "./components";
 import ProtectedRoute from "./components/shared/ProtectedRoute";
@@ -18,44 +20,53 @@ import ChangeEmail from "./pages/ChangeEmail";
 import { Toaster } from "react-hot-toast";
 
 function App() {
-  return (
-    <main className="bg-base text-secondary h-screen w-screen relative flex">
-      <SideBar />
-      <NavBar />
+    return (
+        <main className="bg-base text-secondary h-screen w-screen relative flex">
+            <SideBar />
+            <NavBar />
 
-      <PageContainer>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/liked-concerts" element={<LikedConcerts />} />
+            <PageContainer>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/:id" element={<ConcertPage />} />
+                    <Route path="/videos" element={<Videos />} />
 
-          {/******************** Forms ********************/}
-          <Route path="/register" element={<Register />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/register-stage" element={<RegisterStage />} />
-          <Route path="/change-password" element={<ChangePassword />} />
-          <Route path="/change-email" element={<ChangeEmail />} />
-          {/******************** Forms ********************/}
+                    <Route path="/liked-concerts" element={<LikedConcerts />} />
 
-          <Route path="/search" element={<Search />} />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          >
-            {/* <Route index element={<Navigate to={"followers"} />} /> */}
-            <Route path="followers" element={<Followers />} />
-            <Route path="following" element={<Following />} />
-            <Route path="concerts-you-went" element={<ConcertsYouWent />} />
-          </Route>
-        </Routes>
-      </PageContainer>
+                    {/******************** Forms ********************/}
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/sign-in" element={<SignIn />} />
+                    <Route path="/register-stage" element={<RegisterStage />} />
+                    <Route
+                        path="/change-password"
+                        element={<ChangePassword />}
+                    />
+                    <Route path="/change-email" element={<ChangeEmail />} />
+                    {/******************** Forms ********************/}
 
-      <Toaster />
-    </main>
-  );
+                    <Route path="/search" element={<Search />} />
+                    <Route
+                        path="/profile"
+                        element={
+                            <ProtectedRoute>
+                                <Profile />
+                            </ProtectedRoute>
+                        }
+                    >
+                        <Route index element={<Navigate to={"followers"} />} />
+                        <Route path="followers" element={<Followers />} />
+                        <Route path="following" element={<Following />} />
+                        <Route
+                            path="concerts-you-went"
+                            element={<ConcertsYouWent />}
+                        />
+                    </Route>
+                </Routes>
+            </PageContainer>
+
+            <Toaster />
+        </main>
+    );
 }
 
 export default App;
