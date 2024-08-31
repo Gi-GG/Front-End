@@ -3,40 +3,5 @@
 @tailwind utilities;
 
 .active {
-    @apply border-b-2 border-primary text-primary font-medium;
-}
-
-.concert-cover {
-    background-position: center;
-    background-size: 40vw;
-    max-width: 100%;
-}
-
-/* CSS for scroll container and snapping */
-/* .scroll-container {
-    height: 100vh;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-} */
-
-/* .video-card {
-    scroll-snap-align: start;
-    height: 100vh; 
-} */
-
-/* Ensure each VideoCard takes up full height */
-
-
-/* CSS for scroll container and snapping */
-.scroll-container {
-    height: 100vh;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-}
-
-.video-card {
-    scroll-snap-align: start;
-    height: 100vh; /* Ensure each VideoCard takes up full height */
+  @apply border-b-2 border-primary text-primary font-medium;
 }

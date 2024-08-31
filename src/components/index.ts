@@ -3,7 +3,6 @@ export { default as Navigator } from "./shared/Navigator";
 export { default as Input } from "./shared/Input";
 export { default as Button } from "./shared/Button";
 export { default as Form } from "./shared/Form";
-export { default as Rating } from "./shared/Rating";
 export { default as Skeleton } from "./shared/ui/Skeleton";
 
 export { default as FormNavigator } from "./auth/FormNavigator";

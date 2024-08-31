@@ -1,7 +1,6 @@
 import { heartIcon, pauseIcon, playIcon } from "../../assets";
 import { Song } from "../../types/song";
 import React from "react";
-import Rating from "../shared/Rating";
 
 // Define the type for the props
 interface RecommendedSongProps {
@@ -67,8 +66,6 @@ const RecommendedSong = ({
                 <h4 className="font-medium">{song.song}</h4>
                 <p>{song.artist}</p>
             </div>
-
-            <Rating song={song} />
 
             <button className="w-fit">
                 <img src={heartIcon} alt="heart" />

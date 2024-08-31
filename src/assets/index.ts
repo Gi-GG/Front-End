@@ -19,9 +19,6 @@ export { default as pauseIcon } from "./icons/pause-Icon.svg";
 export { default as notification } from "./icons/notification-icon.svg";
 export { default as fadeLeftLine } from "./icons/fade-left-line.svg";
 export { default as fadeRightLine } from "./icons/fade-right-line.svg";
-export { default as locationIcon } from "./icons/location.svg";
-export { default as date } from "./icons/date.svg";
-export { default as tickets } from "./icons/tickets.svg";
 
 // images
 export { default as union } from "./icons/Union.png";
@@ -29,9 +26,3 @@ export { default as usnionSVG } from "./icons/union-svg.svg";
 export { default as billi } from "./images/billi.svg";
 export { default as abyo } from "./images/abyo.jpg";
 export { default as neutron } from "./images/neutron.png";
-
-//videos
-export { default as reel } from "./videos/reel.mp4";
-export { default as reel2 } from "./videos/reel2.mp4";
-export { default as reel3 } from "./videos/reel3.mp4";
-export { default as reel4 } from "./videos/reel4.mp4";
