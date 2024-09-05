@@ -1,4 +1,5 @@
 import { useGetRecommendedSongs } from "../../hooks/songs/useGetRecommendedSongs";
+import { ModalProvider } from "../shared/ModalProvider";
 import Skeleton from "../shared/ui/Skeleton";
 import RecommendedSongsList from "./RecommendedSongsList";
 
@@ -19,7 +20,9 @@ const RecommendedSongs = () => {
           <Skeleton className="w-full h-12 rounded my-4" />
         </div>
       ) : (
-        <RecommendedSongsList songs={songs} />
+        <ModalProvider>
+          <RecommendedSongsList songs={songs} />
+        </ModalProvider>
       )}
     </div>
   );
