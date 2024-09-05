@@ -2,8 +2,13 @@ import { useRef, useState, useEffect } from "react";
 import { Song } from "../../types/song";
 import RecommendedSong from "./RecommendedSong";
 import { motion } from "framer-motion";
+import { useModalContext } from "../shared/ModalProvider";
+import Modal from "../shared/ui/Modal";
+import AddReviewForm from "./AddReviewForm";
 
 const RecommendedSongsList = ({ songs }: { songs: Song[] | undefined }) => {
+  const { isModalVisible, setIsModalVisible, selectedSong } = useModalContext();
+
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [songUrl, setSongUrl] = useState("");
   const [playingSongUrl, setPlayingSongUrl] = useState<string | null>(null);
@@ -50,6 +55,16 @@ const RecommendedSongsList = ({ songs }: { songs: Song[] | undefined }) => {
       ))}
 
       <audio ref={audioRef} src={songUrl} className="hidden"></audio>
+
+      <Modal
+        isVisible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+      >
+        <div className="flex items-center justify-center flex-col gap-3 w-full h-full">
+          <p>You Rated {selectedSong?.song} !</p>
+          <AddReviewForm song={selectedSong} />
+        </div>
+      </Modal>
     </div>
   );
 };
